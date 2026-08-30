@@ -27,12 +27,13 @@
   --body:"M PLUS 1", -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
   --util:"Oswald", sans-serif;
 
-  --pad: clamp(20px, 5vw, 72px);
+  --pad: clamp(22px, 5vw, 72px);
   --maxw: 1080px;
 }
 
 *{box-sizing:border-box;}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+html{overflow-x:hidden;}
 body{
   margin:0;
   background:var(--indigo);
@@ -69,7 +70,7 @@ body::before{
 @media (max-width:700px){ .selvedge{width:6px;} .selvedge::after{left:2px;width:2px;} }
 
 /* ── ヒーロー ───────────────────────────── */
-.hero{padding:clamp(84px,16vh,180px) 0 clamp(48px,8vh,80px);}
+.hero{padding-top:clamp(84px,16vh,180px);padding-bottom:clamp(48px,8vh,80px);}
 .eyebrow{
   font-family:var(--util);font-weight:500;font-size:13px;
   letter-spacing:.34em;text-transform:uppercase;color:var(--brass);
@@ -122,7 +123,7 @@ body::before{
 .patch:nth-child(even) .dot{background:var(--brass);}
 
 /* ── セクション ─────────────────────────── */
-.section{padding:clamp(56px,9vh,96px) 0;border-top:1px solid var(--indigo-line);}
+.section{padding-top:clamp(56px,9vh,96px);padding-bottom:clamp(56px,9vh,96px);border-top:1px solid var(--indigo-line);}
 .label{
   font-family:var(--util);font-weight:500;font-size:12px;
   letter-spacing:.3em;text-transform:uppercase;color:var(--brass);
@@ -206,9 +207,9 @@ body::before{
 .contact-mail:hover{color:var(--brass);}
 .contact-meta{margin:26px 0 0;font-size:14px;color:var(--muted);}
 
-footer{
+footer.wrap{
   border-top:1px solid var(--indigo-line);
-  padding:28px 0 40px;
+  padding-top:28px;padding-bottom:40px;
   font-family:var(--util);font-size:12px;letter-spacing:.16em;color:var(--muted);
 }
 
