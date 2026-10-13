@@ -256,7 +256,8 @@ a{color:inherit;}
 .dot-ghost{fill:var(--ink);opacity:.09;}
 .dot-fill{fill:var(--wheat);}
 .dot-top{fill:var(--sprout);}
-.dot-anim{opacity:0;transform:translateY(8px);animation:pop .5s ease forwards;}
+.dot-anim{opacity:0;transform:translateY(8px);transform-box:fill-box;}
+.grain-fig.play .dot-anim{animation:pop .5s ease forwards;}
 @keyframes pop{to{opacity:1;transform:translateY(0);}}
 
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(32px,6vw,44px);}
@@ -386,7 +387,7 @@ a{color:inherit;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   .reveal{opacity:1;transform:none;transition:none;}
-  .dot-anim{opacity:1;transform:none;animation:none;}
+  .dot-anim,.grain-fig.play .dot-anim{opacity:1;transform:none;animation:none;}
   .btn{transition:none;}
 }
 </style>
@@ -657,6 +658,19 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('Intersec
   }, { threshold:0.12, rootMargin:'0px 0px -8% 0px' });
   items.forEach(function(el){ io.observe(el); });
 }
+
+// 粒グラフ：画面に入るたびに積み上がり直す
+(function(){
+  var fig=document.querySelector('.grain-fig');
+  if(!fig) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){fig.classList.add('play');return;}
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){fig.classList.add('play');}
+      else{fig.classList.remove('play');}
+    });
+  },{threshold:.35}).observe(fig);
+})();
 </script>
 </body>
 </html>
